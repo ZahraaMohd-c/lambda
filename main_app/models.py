@@ -14,7 +14,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     post_content = models.CharField()
-    post_image = models.CharField(null=True)
+    post_image = models.ImageField(upload_to='post_images/',null=True)
     post_date = models.DateField(auto_now=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
@@ -28,7 +28,7 @@ class Post(models.Model):
 
 class Reply(models.Model):
     reply_content = models.CharField()
-    reply_image = models.CharField(null= True)
+    reply_image = models.ImageField(upload_to='reply_images/',null= True)
     reply_date = models.DateField(auto_now=True)
    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reply_user')
