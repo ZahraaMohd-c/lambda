@@ -37,6 +37,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,8 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -138,13 +138,17 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home_page'     
 LOGOUT_REDIRECT_URL = "/auth/login/"  
 
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.getenv('CLOUD_NAME'),
-    "API_KEY": os.getenv('API_KEY'),
-    "API_SECRET": os.getenv('API_SECRET')
-}
+# CLOUDINARY_STORAGE = {
+#     "CLOUD_NAME": os.getenv('CLOUD_NAME'),
+#     "API_KEY": os.getenv('API_KEY'),
+#     "API_SECRET": os.getenv('API_SECRET'),
+# }
+cloudinary.config( 
+  cloud_name =os.getenv('CLOUD_NAME') , 
+  api_key = os.getenv('API_KEY'), 
+  api_secret = os.getenv('API_SECRET')
+)
 
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-
-
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
+

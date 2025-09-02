@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 # Create your models here.
 
 class Category(models.Model):
@@ -13,8 +15,8 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    post_content = models.CharField()
-    post_image = models.ImageField(upload_to='post_images/',null=True)
+    post_content = models.CharField(max_length=500)
+    post_image = CloudinaryField('image', blank=True, null=True)  
     post_date = models.DateField(auto_now=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
@@ -27,7 +29,7 @@ class Post(models.Model):
         return self.post_content
 
 class Reply(models.Model):
-    reply_content = models.CharField()
+    reply_content = models.CharField(max_length=500)
     reply_image = models.ImageField(upload_to='reply_images/',null= True)
     reply_date = models.DateField(auto_now=True)
    

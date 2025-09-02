@@ -8,6 +8,7 @@
 <body>
     <nav>
         <a href="{% url 'home_page'%}">Home</a>
+        <a href="{% url 'post_list'%}">Posts</a>
             <form action="/auth/logout/" method="post">
             {% csrf_token %}
                 <button type="submit">Logout</button>
