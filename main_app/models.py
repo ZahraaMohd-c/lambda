@@ -18,7 +18,7 @@ class Post(models.Model):
     post_date = models.DateField(auto_now=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
-    Category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
 
     class Meta:
         db_table = 'post'
@@ -47,3 +47,6 @@ class Reply(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')
     reply = models.ForeignKey(Reply, on_delete=models.CASCADE, related_name='like_reply')
+
+    class Meta:
+        db_table = 'like_table'

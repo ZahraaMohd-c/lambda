@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form method="get" action="">
+  <input type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}">
+  <button type="submit">Search</button>
+</form>
+      <h1>posts</h1>
+        {% if posts %}
+            {% for post in posts %}
+                    <p>{{post.post_date}} </p>
+                    <h3>{{post.post_content}} </h3>
+                    {% if post.post_image %}
+                        <img src="{{post.post_image.url}}" alt="{{post.post_image}}">
+                    {% endif %}
+            {% endfor %}
+        {% else %}
+          <p>There is no posts yet</p>
+        {% endif %}
+ {% endblock  %}
