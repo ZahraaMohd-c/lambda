@@ -7,14 +7,19 @@
 </head>
 <body>
     <nav>
+        {% if user.is_authenticated%}
         Welcome, {{user.username}}
+        
+        <a href="{% url 'post_user' user.username%}">My Posts</a>
+        <form action="/auth/logout/" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">login</a>
+        {% endif %}
         <a href="{% url 'home_page'%}">Home</a> |
         <a href="{% url 'post_list'%}">Posts</a> |
-        <a href="{% url 'post_user' user.username%}">My Posts</a>
-            <form action="/auth/logout/" method="post">
-            {% csrf_token %}
-                <button type="submit">Logout</button>
-        </form>
     </nav>
     {% block body  %}
     {% endblock  %}

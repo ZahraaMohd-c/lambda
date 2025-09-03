@@ -5,10 +5,13 @@
         {% csrf_token %}
         <label for="username">Username</label>
         <input type="text" id='username' name='username' >
-
+        <br>
         <label for="password">Password</label>
         <input type="password" id='password' name='password' >
+        <br>
 
         <button>Login</button>
+        <p>Don't Have An Account? <a href="{% url 'signup'%}">Signup</a></p>
     </form>
+    <a href="{% url 'home_page'%}">Continue as Guest</a>
 {% endblock  %}

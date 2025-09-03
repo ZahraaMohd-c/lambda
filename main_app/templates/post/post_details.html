@@ -9,6 +9,8 @@
      <img src="{{post.post_image.url}}" alt="post image" style="width:300px; height:auto;">       
 {% endif %}
 <p>{{post.post_date}} </p>
+<a href="{% url 'post_update' post.id%}">update</a>
+
 <form action="{% url 'post_delete' post.id%}" method='post'>
     {% csrf_token %}
     <button>Delete</button>

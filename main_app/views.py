@@ -6,6 +6,8 @@ from .models import Post, Reply, Like,Category
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
 
@@ -31,7 +33,7 @@ class PostListView(ListView):
             queryset = queryset.filter(post_content__icontains=query)
         return queryset
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin,CreateView):
     model = Post
     form_class = PostForm
     template_name = 'post/post_form.html'
@@ -41,7 +43,7 @@ class PostCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
-class PostUserView(ListView):
+class PostUserView(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'post/post_user.html'
     context_object_name = 'posts'
@@ -55,7 +57,7 @@ class PostDetailsView(DetailView):
     context_object_name = 'post'
     pk_url_kwarg = 'post_id'
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin,UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'post/post_form.html'
@@ -65,7 +67,7 @@ class PostUpdateView(UpdateView):
     # def get_success_url(self):
     #     return reverse("author_detail", kwargs={"pk": self.object.pk})
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
     template_name = 'post/post_details.html'
     success_url = reverse_lazy('post_list')

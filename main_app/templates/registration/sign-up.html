@@ -5,9 +5,12 @@
         {% csrf_token %}
         <label for="username">Username: </label>
         <input type="text" id='username' name='username'>
-
+        <br>
         <label for="password">Password: </label>
         <input type="password" id='password' name='password'>
+        <br>
         <button>Sign up</button>
+        <p>Already Have An Account? <a href="{% url 'login'%}">Login</a></p>
     </form>
+
 {% endblock  %}

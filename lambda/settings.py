@@ -136,7 +136,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home_page'     
-LOGOUT_REDIRECT_URL = "/auth/login/"  
+LOGOUT_REDIRECT_URL = "login"  
 
 # CLOUDINARY_STORAGE = {
 #     "CLOUD_NAME": os.getenv('CLOUD_NAME'),
@@ -146,7 +146,7 @@ LOGOUT_REDIRECT_URL = "/auth/login/"
 cloudinary.config( 
   cloud_name =os.getenv('CLOUD_NAME') , 
   api_key = os.getenv('API_KEY'), 
-  api_secret = os.getenv('API_SECRET')
+  api_secret = os.getenv('API_SECRET'),
 )
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

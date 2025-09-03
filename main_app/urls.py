@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
+from .root_redirect import root_redirect
+
 
 urlpatterns = [
+    path('', root_redirect, name='root_redirect'),
     path('auth/signup/', views.SignUpView.as_view(), name ='signup'),
 
     path('home/', views.HomePageView.as_view(), name='home_page' ),
