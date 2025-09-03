@@ -5,7 +5,18 @@
 
     <form method='post' enctype = 'multipart/form-data'>
         {% csrf_token %}
-        {{form.as_p}}
+
+        <label for="post_title">Post title:</label>
+        <input value="{{post.post_title}}" type="text" id='post_title' name='post_title'>
+
+        <label for="post_content">Post content:</label>
+        <input value="{{post.post_content}}" type="text" id='post_content' name='post_content'>
+
+        <label for="post_image">Image:</label>
+        <input value="{{post.post_image}}" type="file" id='post_image' name='post_image'>
+
+        <label for="category">Category:</label>
+        {{form.category}}
 
         <button>Submit</button>
     </form>

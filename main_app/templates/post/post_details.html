@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Post details</h1>
+<h2>{{post.post_title}} </h2>
+<p>{{post.category}} </p>
+<h3>{{post.post_content}} </h3>
+{% if post.post_image %}
+     <img src="{{post.post_image.url}}" alt="post image" style="width:300px; height:auto;">       
+{% endif %}
+<p>{{post.post_date}} </p>
+<form action="{% url 'post_delete' post.id%}" method='post'>
+    {% csrf_token %}
+    <button>Delete</button>
+</form>
+
+{% endblock  %}

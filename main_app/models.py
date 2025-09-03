@@ -15,6 +15,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    post_title = models.CharField(max_length=100,null=True)
     post_content = models.CharField(max_length=500)
     post_image = CloudinaryField('image', blank=True, null=True)  
     post_date = models.DateField(auto_now=True)
@@ -30,7 +31,7 @@ class Post(models.Model):
 
 class Reply(models.Model):
     reply_content = models.CharField(max_length=500)
-    reply_image = models.ImageField(upload_to='reply_images/',null= True)
+    reply_image = CloudinaryField('image', blank=True, null=True)  
     reply_date = models.DateField(auto_now=True)
    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reply_user')

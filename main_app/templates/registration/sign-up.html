@@ -3,12 +3,11 @@
     <h1>Sign up</h1>
     <form method='post'>
         {% csrf_token %}
-        {{ form.as_p }}
-        {% if form.errors %}
-            <div class="text-danger">
-                {{ form.errors }}
-            </div>
-        {% endif %}
+        <label for="username">Username: </label>
+        <input type="text" id='username' name='username'>
+
+        <label for="password">Password: </label>
+        <input type="password" id='password' name='password'>
         <button>Sign up</button>
     </form>
 {% endblock  %}

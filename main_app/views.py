@@ -3,9 +3,9 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.views import View
 from .models import Post, Reply, Like,Category
-from django.contrib.auth.models import User # this is the user model we use to log in
+from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import PostForm
+from .forms import SignUpForm, PostForm
 # Create your views here.
 
 
@@ -15,7 +15,7 @@ class HomePageView(TemplateView):
 
 class SignUpView(CreateView):
     model = User
-    form_class = UserCreationForm
+    form_class = SignUpForm
     success_url = reverse_lazy('home_page')
     template_name = 'registration/sign-up.html'
 
@@ -48,3 +48,26 @@ class PostUserView(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(user=self.request.user)
+
+class PostDetailsView(DetailView):
+    model = Post
+    template_name = 'post/post_details.html'
+    context_object_name = 'post'
+    pk_url_kwarg = 'post_id'
+
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'post/post_form.html'
+    pk_url_kwarg = 'post_id'
+    context_object_name = 'post'
+    success_url = reverse_lazy('post_list')
+    # def get_success_url(self):
+    #     return reverse("author_detail", kwargs={"pk": self.object.pk})
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'post/post_details.html'
+    success_url = reverse_lazy('post_list')
+    pk_url_kwarg = 'post_id'
+

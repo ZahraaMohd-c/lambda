@@ -3,8 +3,13 @@ from . import views
 
 urlpatterns = [
     path('auth/signup/', views.SignUpView.as_view(), name ='signup'),
+
     path('home/', views.HomePageView.as_view(), name='home_page' ),
+
     path('posts/',views.PostListView.as_view(), name='post_list'),
     path('posts/new/', views.PostCreateView.as_view(), name='post_create'),
-    path('posts/user', views.PostUserView.as_view(), name='post_user')
+    path('posts/<int:post_id>', views.PostDetailsView.as_view(),name='post_details'),
+    path('posts/<str:username>', views.PostUserView.as_view(), name='post_user'),
+    path('posts/<int:post_id>/update/', views.PostUpdateView.as_view(), name='post_update'),
+    path('posts/<int:post_id>/delete', views.PostDeleteView.as_view(), name='post_delete'),
 ]
