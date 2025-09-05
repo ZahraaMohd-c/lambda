@@ -88,11 +88,6 @@ class ReplyCreateview(LoginRequiredMixin,CreateView):
         form.instance.post = post
         return super().form_valid(form)
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post'] = get_object_or_404(Post, pk=self.kwargs['post_id'])
-        return context
-    
     def get_success_url(self):
         return reverse_lazy('post_details', kwargs={'post_id': self.kwargs['post_id']})
 
@@ -100,7 +95,7 @@ class ReplyListView(ListView):
     model = Reply
     template_name = 'reply/reply_list.html'
     context_object_name = 'replies'
-
+    
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs['post_id'])
         return Reply.objects.filter(post=post).order_by('-reply_date')
