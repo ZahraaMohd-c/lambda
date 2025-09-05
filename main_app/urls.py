@@ -19,5 +19,7 @@ urlpatterns = [
     path('posts/<int:post_id>/reply/new/', views.ReplyCreateview.as_view(), name='reply_create'),
     path('posts/<int:post_id>/reply/', views.ReplyListView.as_view(), name='post_replies'),
     path('replies/<int:reply_id>/', views.ReplyDetailsView.as_view(), name='reply_details'),
-    path('replies/<int:reply_id>/delete', views.ReplyDeleteView.as_view(), name='reply_delete')
+    path('replies/<int:reply_id>/delete', views.ReplyDeleteView.as_view(), name='reply_delete'),
+    path('replies/<int:reply_id>/like/', views.toggle_like.as_view(), name='like_reply'),
+
 ]

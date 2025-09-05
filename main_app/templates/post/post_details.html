@@ -35,6 +35,14 @@
                 <small>{{ reply.reply_date|date:"M d, Y" }}</small>
                 <br>
                 </a>
+                 <button class="like-btn" data-reply-id="{{ reply.id }}">
+                    {% if reply.liked_by_user %}
+                         Unlike
+                    {% else %}
+                         Like
+                    {% endif %}
+                    (<span class="like-count">{{ reply.like_reply.count }}</span>)
+                </button>
             </li>
         {% endfor %}
     </ul>
@@ -59,4 +67,4 @@
     })
 </script>
 
-{% endblock  %}
+{% endblock %}

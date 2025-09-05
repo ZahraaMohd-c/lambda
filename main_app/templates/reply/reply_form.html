@@ -5,6 +5,16 @@
     {% csrf_token %}
     <label for="reply_content">Reply:</label>
     <textarea placeholder='Write your reply...' name="reply_content" id="reply_content">{{reply.reply_content}} </textarea>
+    <div>
+        <label>
+            <input type="checkbox" id="live_preview_toggle" checked>
+                    Enable live preview
+        </label>
+    </div>
+
+    <div id="math_preview" >
+        <em>Math preview will appear here...</em>
+    </div>
 
     <label for="reply_image"></label>
     <input type="file" id="reply_image" name="reply_image">
@@ -14,4 +24,32 @@
 
         <button type='submit'>Reply</button>
 </form>
+
+<script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        const textarea = document.getElementById('reply_content')
+        const preview = document.getElementById('math_preview')
+        const toggle = document.getElementById('live_preview_toggle')
+        function updatePreview() {
+            if (!toggle.checked) {
+                preview.innerHTML = '<em>Live preview disabled</em>'
+                return
+            }
+            preview.textContent = textarea.value || 'Type something with LaTeX syntax...'
+            MathJax.typesetPromise([preview])
+        }
+
+        textarea.addEventListener('input', updatePreview)
+        toggle.addEventListener('change', updatePreview)
+        updatePreview() 
+    </script>
 {% endblock  %}

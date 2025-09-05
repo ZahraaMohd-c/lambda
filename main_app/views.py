@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.views import View
@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, PostForm, ReplyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -59,7 +61,16 @@ class PostDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['replies'] = self.object.replies.order_by('-reply_date')  
+        replies = self.object.replies.order_by('-reply_date')
+
+        if self.request.user.is_authenticated:
+            for reply in replies:
+                reply.liked_by_user = reply.like_reply.filter(user=self.request.user).exists()
+        else:
+            for reply in replies:
+                reply.liked_by_user = False
+
+        context['replies'] = replies
         return context
     
 class PostUpdateView(LoginRequiredMixin,UpdateView):
@@ -95,7 +106,7 @@ class ReplyListView(ListView):
     model = Reply
     template_name = 'reply/reply_list.html'
     context_object_name = 'replies'
-    
+
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs['post_id'])
         return Reply.objects.filter(post=post).order_by('-reply_date')
@@ -117,3 +128,21 @@ class ReplyDeleteView(DeleteView):
         post_id = self.object.post.id
         return reverse_lazy('post_details', kwargs={'post_id': post_id})
 
+class toggle_like(LoginRequiredMixin,View):
+
+    def like_reply(request, reply_id):
+        reply = get_object_or_404(Reply, id=reply_id)
+        liked = False
+
+        like_instance = Like.objects.filter(user=request.user, reply=reply).first()
+        if like_instance:
+        
+            like_instance.delete()
+        else:
+            Like.objects.create(user=request.user, reply=reply)
+            liked = True
+
+        return JsonResponse({
+        'liked': liked,
+        'like_count': reply.like_reply.count(),
+        }) 
