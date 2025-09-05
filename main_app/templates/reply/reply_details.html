@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h1>Reply Details</h1>
+    <p>User: {{ reply.user.username }}</p>
+    <p>Content: {{ reply.reply_content }}</p>
+    {% if reply.reply_image %}
+        <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
+    {% endif %}
+    <p>Date: {{ reply.reply_date|date:"M d, Y" }}</p>
+    {% if user.is_authenticated and reply.user == user %}
+        <form action="{% url 'reply_delete' reply.id %}" method='post'>
+            {% csrf_token %}
+            <button>Delete</button>
+        </form>
+    {% endif %}
+{% endblock  %}

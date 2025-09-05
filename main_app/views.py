@@ -18,7 +18,7 @@ class HomePageView(TemplateView):
 class SignUpView(CreateView):
     model = User
     form_class = SignUpForm
-    success_url = reverse_lazy('home_page')
+    success_url = reverse_lazy('login')
     template_name = 'registration/sign-up.html'
 
 class PostListView(ListView):
@@ -95,3 +95,30 @@ class ReplyCreateview(LoginRequiredMixin,CreateView):
     
     def get_success_url(self):
         return reverse_lazy('post_details', kwargs={'post_id': self.kwargs['post_id']})
+
+class ReplyListView(ListView):
+    model = Reply
+    template_name = 'reply/reply_list.html'
+    context_object_name = 'replies'
+
+    def get_queryset(self):
+        post = get_object_or_404(Post, pk=self.kwargs['post_id'])
+        return Reply.objects.filter(post=post).order_by('-reply_date')
+
+
+class ReplyDetailsView(DetailView):
+    model = Reply
+    template_name = 'reply/reply_details.html'
+    context_object_name = 'reply'
+    pk_url_kwarg = 'reply_id'
+
+
+class ReplyDeleteView(DeleteView):
+    model = Reply
+    template_name = 'reply/reply_details.html'
+    pk_url_kwarg = 'reply_id'
+
+    def get_success_url(self):
+        post_id = self.object.post.id
+        return reverse_lazy('post_details', kwargs={'post_id': post_id})
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h1>Replies</h1>
+    {% comment %} <a href="{% url 'post_details' post.id %}">Back</a> {% endcomment %}
+    {% if replies %}
+    <ul>
+        {% for reply in replies %}
+            <li>
+                <p>{{ reply.user }} </p>
+                <p>{{ reply.reply_content }} </p>
+                {% if reply.reply_image %}
+                    <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
+                {% endif %}
+                <p>{{ reply.reply_date }} </p>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No replies yet.</p>
+    {% endif %}
+{% endblock  %}

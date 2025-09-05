@@ -8,12 +8,14 @@
      <img src="{{post.post_image.url}}" alt="post image" style="width:300px; height:auto;">       
 {% endif %}
 <p>{{post.post_date}} </p>
+{% if user.is_authenticated and post.user == user %}
 <a href="{% url 'post_update' post.id%}">update</a>
 
 <form action="{% url 'post_delete' post.id%}" method='post'>
     {% csrf_token %}
     <button>Delete</button>
 </form>
+{% endif %}
 <br>
 <hr>
 <h3>Replies</h3>
@@ -21,6 +23,7 @@
     <ul>
         {% for reply in replies|slice:":4" %}
             <li>
+                <a href="{% url 'reply_details' reply.id %}">
                 <strong>{{ reply.user.username }}</strong>
                 <br>
                 {% if reply.reply_image %}
@@ -31,11 +34,12 @@
                 <br>
                 <small>{{ reply.reply_date|date:"M d, Y" }}</small>
                 <br>
+                </a>
             </li>
         {% endfor %}
     </ul>
     {% if replies|length > 4 %}
-        {% comment %} <a href="{% url 'post_replies' post.id %}">View all replies</a> {% endcomment %}
+        <a href="{% url 'post_replies' post.id %}">View all replies</a>
     {% endif %}
 {% else %}
     <p>No replies yet.</p>
