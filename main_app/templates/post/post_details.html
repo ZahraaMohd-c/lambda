@@ -3,7 +3,7 @@
 {% block body %}
 <h2>{{post.post_title}} </h2>
 <p>Category: {{post.category}} </p>
-<h3>{{post.post_content|safe}} </h3>
+<h3>${{post.post_content|safe}}$ </h3>
 {% if post.post_image %}
      <img src="{{post.post_image.url}}" alt="post image" style="width:300px; height:auto;">       
 {% endif %}
@@ -15,8 +15,14 @@
     <button>Delete</button>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<script>
+{% comment %} <script>
     MathJax.typeset()
+</script> {% endcomment %}
+<script>
+    // Wait for DOM to load before typesetting
+    document.addEventListener("DOMContentLoaded", function() {
+        MathJax.typesetPromise([document.getElementById("post-content")]);
+    });
 </script>
 
 {% endblock  %}
