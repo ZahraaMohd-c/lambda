@@ -1,22 +1,74 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>post</h1>
-
-    <form method='post' enctype = 'multipart/form-data'>
+    <a href="{% url 'post_list'%}">Cancel</a>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <label for="post_title">Post title:</label>
-        <input value="{{post.post_title}}" type="text" id='post_title' name='post_title'>
+        <div>
+            <label for="post_title">Post title:</label>
+            <input type="text" id="post_title" name="post_title"
+                   value="{{ post.post_title }}">
+        </div>
 
-        <label for="post_content">Post content:</label>
-        <textarea value="{{post.post_content}}" type="text" id='post_content' name='post_content'></textarea>
-        <label for="post_image">Image:</label>
-        <input value="{{post.post_image}}" type="file" id='post_image' name='post_image'>
+        <div>
+            <label for="post_content">Post content:</label>
+            <textarea id="post_content" name="post_content" >{{ post.post_content }}</textarea>
+            <small>Use LaTeX syntax, e.g.,$x^2 + y^2 = z^2$</small>
 
-        <label for="category">Category:</label>
-        {{form.category}}
+            <div>
+                <label>
+                    <input type="checkbox" id="live_preview_toggle" checked>
+                    Enable live preview
+                </label>
+            </div>
 
-        <button>Submit</button>
+            <div id="math_preview" >
+                <em>Math preview will appear here...</em>
+            </div>
+        </div>
+
+        <div>
+            <label for="post_image">Image:</label>
+            <input type="file" id="post_image" name="post_image">
+            {% if post.post_image %}
+                <p>Current image: <img src="{{ post.post_image.url }}" alt="Post image" width="100"></p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="category">Category:</label>
+            {{ form.category }}
+        </div>
+
+        <button type="submit">Submit</button>
     </form>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        const textarea = document.getElementById('post_content')
+        const preview = document.getElementById('math_preview')
+        const toggle = document.getElementById('live_preview_toggle')
+        function updatePreview() {
+            if (!toggle.checked) {
+                preview.innerHTML = '<em>Live preview disabled</em>'
+                return
+            }
+            preview.textContent = textarea.value || 'Type something with LaTeX syntax...'
+            MathJax.typesetPromise([preview])
+        }
+
+        textarea.addEventListener('input', updatePreview)
+        toggle.addEventListener('change', updatePreview)
+        updatePreview() 
+    </script>
 {% endblock %}

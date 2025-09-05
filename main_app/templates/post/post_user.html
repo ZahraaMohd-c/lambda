@@ -13,7 +13,6 @@
                 {{post.post_title}}
             </a>
             <p>{{post.post_date}} </p>
-            <a href="{% url 'post_update' post.id%}">update</a>
 
             {% endfor %}
         {% else %}

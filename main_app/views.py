@@ -64,9 +64,7 @@ class PostUpdateView(LoginRequiredMixin,UpdateView):
     pk_url_kwarg = 'post_id'
     context_object_name = 'post'
     success_url = reverse_lazy('post_list')
-    # def get_success_url(self):
-    #     return reverse("author_detail", kwargs={"pk": self.object.pk})
-
+    
 class PostDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
     template_name = 'post/post_details.html'
