@@ -7,7 +7,7 @@
 </head>
 <body>
     <nav>
-        {% if user.is_authenticated%}
+        {% if user.is_authenticated %}
         Welcome, {{user.username}}
         
         <a href="{% url 'post_user' user.username%}">My Posts</a>

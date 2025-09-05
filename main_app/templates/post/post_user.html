@@ -6,6 +6,8 @@
   <button type="submit">Search</button>
 </form>
       <h1>My Posts</h1>
+      <a href="{% url 'post_create'%}">
+        <button>+</button></a>
         {% if posts %}
             {% for post in posts %}
             <p>{{post.user}} </p>

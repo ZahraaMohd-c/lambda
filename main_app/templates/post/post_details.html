@@ -14,15 +14,45 @@
     {% csrf_token %}
     <button>Delete</button>
 </form>
+<br>
+<hr>
+<h3>Replies</h3>
+{% if replies %}
+    <ul>
+        {% for reply in replies|slice:":4" %}
+            <li>
+                <strong>{{ reply.user.username }}</strong>
+                <br>
+                {% if reply.reply_image %}
+                <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
+                {% endif %}
+                <br>
+                {{ reply.reply_content }}
+                <br>
+                <small>{{ reply.reply_date|date:"M d, Y" }}</small>
+                <br>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if replies|length > 4 %}
+        {% comment %} <a href="{% url 'post_replies' post.id %}">View all replies</a> {% endcomment %}
+    {% endif %}
+{% else %}
+    <p>No replies yet.</p>
+{% endif %}
+{% if user.is_authenticated %}
+
+<a href="{% url 'reply_create' post.id %}">Add A reply</a>
+{% else %}
+<p><a href="{% url 'login' %}">Login</a> to post a reply.</p>
+{% endif %}
+
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-{% comment %} <script>
-    MathJax.typeset()
-</script> {% endcomment %}
+
 <script>
-    // Wait for DOM to load before typesetting
     document.addEventListener("DOMContentLoaded", function() {
-        MathJax.typesetPromise([document.getElementById("post-content")]);
-    });
+        MathJax.typesetPromise([document.getElementById("post-content")])
+    })
 </script>
 
 {% endblock  %}

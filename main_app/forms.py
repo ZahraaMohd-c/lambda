@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post , Category
+from .models import Post , Category, Reply
 from django.contrib.auth.models import User
 
 class SignUpForm(forms.ModelForm):
@@ -21,4 +21,9 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['post_title','post_content','post_image','category']
-       
+
+class ReplyForm(forms.ModelForm):
+   class Meta:
+      model = Reply
+      fields = ['reply_content','reply_image']
+      

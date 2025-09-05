@@ -35,7 +35,7 @@ class Reply(models.Model):
     reply_date = models.DateField(auto_now=True)
    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reply_user')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='replies')
 
     class Meta:
         db_table = 'reply'

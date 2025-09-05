@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body  %}
+<form  method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="reply_content">Reply:</label>
+    <textarea placeholder='Write your reply...' name="reply_content" id="reply_content">{{reply.reply_content}} </textarea>
+
+    <label for="reply_image"></label>
+    <input type="file" id="reply_image" name="reply_image">
+            {% if reply.reply_image %}
+                <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
+            {% endif %}
+
+        <button type='submit'>Reply</button>
+</form>
+{% endblock  %}

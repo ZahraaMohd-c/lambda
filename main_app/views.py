@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.views import View
 from .models import Post, Reply, Like,Category
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, PostForm
+from .forms import SignUpForm, PostForm, ReplyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -57,6 +57,11 @@ class PostDetailsView(DetailView):
     context_object_name = 'post'
     pk_url_kwarg = 'post_id'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['replies'] = self.object.replies.order_by('-reply_date')  
+        return context
+    
 class PostUpdateView(LoginRequiredMixin,UpdateView):
     model = Post
     form_class = PostForm
@@ -71,3 +76,22 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
     success_url = reverse_lazy('post_list')
     pk_url_kwarg = 'post_id'
 
+class ReplyCreateview(LoginRequiredMixin,CreateView):
+    model = Reply
+    form_class = ReplyForm
+    template_name = 'reply/reply_form.html'
+    success_url = reverse_lazy('post_list')
+
+    def form_valid(self, form):
+        post = get_object_or_404(Post, pk=self.kwargs['post_id'])
+        form.instance.user = self.request.user
+        form.instance.post = post
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post'] = get_object_or_404(Post, pk=self.kwargs['post_id'])
+        return context
+    
+    def get_success_url(self):
+        return reverse_lazy('post_details', kwargs={'post_id': self.kwargs['post_id']})
