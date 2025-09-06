@@ -18,13 +18,13 @@
                 <form method="post" action="{% url 'like_reply' reply.id %}">
                     {% csrf_token %}
                     <button id="like-btn" type="submit" data-reply-id="{{ reply.id }}">
-                    {% if did_liked %}
-                        ❤️ {{ reply.like_reply.count }}
+                    {% if reply.liked_by_user %}
+                        ❤️ 
                     {% else %}
-                        🤍 {{ reply.like_reply.count }}
+                        🤍 
                     {% endif %}
                 </button>
-                <span id="like-count">{{ reply.like_reply.count }} people liked this</span>
+                <span id="like-count">{{ reply.like_reply.count }} likes</span>
                 </form>
                 
             </li>

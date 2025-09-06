@@ -23,26 +23,29 @@
     <ul>
         {% for reply in replies|slice:":4" %}
             <li>
-                <a href="{% url 'reply_details' reply.id %}">
                 <strong>{{ reply.user.username }}</strong>
                 <br>
                 {% if reply.reply_image %}
                 <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
                 {% endif %}
                 <br>
+                <a href="{% url 'reply_details' reply.id %}">
                 {{ reply.reply_content }}
                 <br>
+                </a>
                 <small>{{ reply.reply_date|date:"M d, Y" }}</small>
                 <br>
-                </a>
-                 <button class="like-btn" data-reply-id="{{ reply.id }}">
-                    {% if reply.liked_by_user %}
-                         Unlike
-                    {% else %}
-                         Like
-                    {% endif %}
-                    (<span class="like-count">{{ reply.like_reply.count }}</span>)
-                </button>
+                <form action="{% url 'like_reply' reply.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="like-btn" data-reply-id="{{ reply.id }}">
+                       {% if reply.liked_by_user %}
+                            ❤️
+                       {% else %}
+                            🤍
+                       {% endif %}
+                   </button>
+                </form>
+                <small class="like-count">{{ reply.like_reply.count }} likes</small>
             </li>
         {% endfor %}
     </ul>
