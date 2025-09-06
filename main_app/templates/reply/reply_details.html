@@ -8,10 +8,24 @@
         <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
     {% endif %}
     <p>Date: {{ reply.reply_date|date:"M d, Y" }}</p>
+
+    <form method="post" action="{% url 'like_reply' reply.id %}">
+            {% csrf_token %}
+            <button id="like-btn" type="submit" data-reply-id="{{ reply.id }}">
+            {% if not did_liked %}
+                Like {{ reply.like_reply.count }}
+            {% else %}
+                Unlike {{ reply.like_reply.count }}
+            {% endif %}
+        </button>
+        <span id="like-count">{{ reply.like_reply.count }} people liked this</span>
+        </form>
     {% if user.is_authenticated and reply.user == user %}
         <form action="{% url 'reply_delete' reply.id %}" method='post'>
             {% csrf_token %}
             <button>Delete</button>
         </form>
     {% endif %}
-{% endblock  %}
+{% endblock %}
+
+

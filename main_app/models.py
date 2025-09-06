@@ -53,3 +53,6 @@ class Like(models.Model):
 
     class Meta:
         db_table = 'like_table'
+
+    def __str__(self):
+        return f'{self.user}, {self.reply}'

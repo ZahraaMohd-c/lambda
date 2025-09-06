@@ -118,6 +118,13 @@ class ReplyDetailsView(DetailView):
     context_object_name = 'reply'
     pk_url_kwarg = 'reply_id'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['did_liked'] = Like.objects.filter(user=user,reply=self.object).exists()
+        return context
+    
+
 
 class ReplyDeleteView(DeleteView):
     model = Reply
@@ -130,19 +137,17 @@ class ReplyDeleteView(DeleteView):
 
 class toggle_like(LoginRequiredMixin,View):
 
-    def like_reply(request, reply_id):
-        reply = get_object_or_404(Reply, id=reply_id)
-        liked = False
+    def post(self,request, reply_id):
 
-        like_instance = Like.objects.filter(user=request.user, reply=reply).first()
-        if like_instance:
-        
-            like_instance.delete()
+        reply = Reply.objects.get(id=reply_id)
+        like, created = Like.objects.get_or_create(user=request.user, reply=reply)
+
+        if not created:
+            like.delete()
+            liked = False
         else:
-            Like.objects.create(user=request.user, reply=reply)
             liked = True
 
-        return JsonResponse({
-        'liked': liked,
-        'like_count': reply.like_reply.count(),
-        }) 
+        return redirect('reply_details',reply_id=reply.id)
+        
+    
