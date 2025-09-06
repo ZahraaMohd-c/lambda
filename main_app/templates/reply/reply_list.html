@@ -6,26 +6,27 @@
     <ul>
         {% for reply in replies %}
             <li>
-                <a href="{% url 'reply_details' reply.id %}">
                 <p>{{ reply.user }} </p>
+                <a href="{% url 'reply_details' reply.id %}">
                 <p>{{ reply.reply_content }} </p>
                 {% if reply.reply_image %}
                     <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
                 {% endif %}
+                </a>
                 <p>{{ reply.reply_date }} </p>
 
                 <form method="post" action="{% url 'like_reply' reply.id %}">
                     {% csrf_token %}
                     <button id="like-btn" type="submit" data-reply-id="{{ reply.id }}">
-                    {% if not did_liked %}
-                        Like {{ reply.like_reply.count }}
+                    {% if did_liked %}
+                        ❤️ {{ reply.like_reply.count }}
                     {% else %}
-                        Unlike {{ reply.like_reply.count }}
+                        🤍 {{ reply.like_reply.count }}
                     {% endif %}
                 </button>
                 <span id="like-count">{{ reply.like_reply.count }} people liked this</span>
                 </form>
-                </a>
+                
             </li>
         {% endfor %}
     </ul>

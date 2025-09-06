@@ -158,4 +158,3 @@ class toggle_like(LoginRequiredMixin,View):
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
         
-    
