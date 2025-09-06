@@ -109,7 +109,15 @@ class ReplyListView(ListView):
 
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs['post_id'])
-        return Reply.objects.filter(post=post).order_by('-reply_date')
+        replies = Reply.objects.filter(post=post).order_by('-reply_date')
+        user = self.request.user
+        for reply in replies:
+            if user.is_authenticated:
+                reply.liked_by_user = reply.like_reply.filter(user=user).exists()
+            else:
+                reply.liked_by_user = False
+
+        return replies
 
 
 class ReplyDetailsView(DetailView):
@@ -148,6 +156,6 @@ class toggle_like(LoginRequiredMixin,View):
         else:
             liked = True
 
-        return redirect('reply_details',reply_id=reply.id)
+        return redirect(request.META.get('HTTP_REFERER', '/'))
         
     
