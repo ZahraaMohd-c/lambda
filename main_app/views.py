@@ -7,8 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, PostForm, ReplyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -32,7 +31,11 @@ class PostListView(ListView):
         queryset = super().get_queryset()
         query = self.request.GET.get('q')
         if query:
-            queryset = queryset.filter(post_content__icontains=query)
+            queryset = queryset.filter(
+                Q(post_title__icontains=query) |
+                Q(post_content__icontains=query) |
+                Q(category__name__icontains=query)
+            )
         return queryset.order_by('-post_date')
 
 class PostCreateView(LoginRequiredMixin,CreateView):
@@ -51,7 +54,15 @@ class PostUserView(LoginRequiredMixin,ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.filter(user=self.request.user).order_by('-post_date')
+        queryset = Post.objects.filter(user=self.request.user).order_by('-post_date')
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(
+                Q(post_title__icontains=query) |
+                Q(post_content__icontains=query) |
+                Q(category__name__icontains=query)
+            )
+        return queryset.order_by('-post_date')
 
 class PostDetailsView(DetailView):
     model = Post
