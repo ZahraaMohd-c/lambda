@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
+
+/* navbar */
+
+
 body {
     font-family: "Karla", sans-serif;
     margin: 0;
@@ -142,13 +146,15 @@ body {
 .features ul {
     list-style: disc;
     padding-left: 20px;
+    font-size: large;
 }
 
+
 .latex-guide {
-    background: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     margin-top: 30px;
+    font-size: large;
 }
 
 .latex-guide h3 {
@@ -156,20 +162,6 @@ body {
     margin-bottom: 10px;
 }
 
-.latex-examples {
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-top: 10px;
-}
-
-.latex-examples code, .latex-examples pre {
-    background: #eee;
-    padding: 4px 6px;
-    border-radius: 4px;
-    font-family: monospace;
-}
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -177,9 +169,19 @@ body {
 }
 
 
-.hero-section, .features,.latex-guide {
+.hero-section, .features,.latex-guide,.homepage-container img {
     animation: fadeIn 1s ease forwards;
 }
 
+.homepage-container img {
+    width: 250px;
+    height: 280px;
+    margin: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    align-self: center;
+}
 
+.homepage-container img:hover {
+    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
 
