@@ -100,3 +100,86 @@ body {
     margin: 0;
     display: inline;
 }
+
+
+
+/* home page */
+
+.homepage-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: "Karla", sans-serif;
+    color: #0A1653;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+}
+
+.hero-section .highlight {
+    color: #4E75FF;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.features {
+    margin: 30px 0;
+}
+
+.features h3 {
+    color: #2F54D1;
+}
+
+.features ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.latex-guide {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.latex-guide h3 {
+    color: #4E75FF;
+    margin-bottom: 10px;
+}
+
+.latex-examples {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.latex-examples code, .latex-examples pre {
+    background: #eee;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+.hero-section, .features,.latex-guide {
+    animation: fadeIn 1s ease forwards;
+}
+
+
+

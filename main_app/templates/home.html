@@ -1,8 +1,35 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body %}
+<img src="{% static "images\germain.jpg" %}" alt="Germain">
+<img src="{% static "images\Archimedes.jpg" %}" alt="Archimedes">
+<img src="{% static "images\Daniel_Bernoulli.jpg" %}" alt="Daniel Bernoulli">
 
-{% block body  %}
-<h1>Welcome to Lambda </h1>
-<h2>Your one-stop solution for all your needs</h2>
-<h3>This website is designed to help you with your mathematics problems where you post your problem in any field and get help from our community.</h3>
+<div class="homepage-container">
+    <header class="hero-section">
+        <h1>Welcome to <span class="highlight">Lambda</span></h1>
+        <h2>Your one-stop solution for mathematics discussions</h2>
+        <p class="intro-text">
+            Lambda is designed to help you with your math problems. Post your questions from any field—algebra, calculus, geometry, or more—and get help from our active community.
+        </p>
+    </header>
 
-{% endblock  %}
+    <section class="features">
+        <h3>Why Lambda?</h3>
+        <ul>
+            <li>Post and solve math problems easily</li>
+            <li>Learn LaTeX for professional mathematical formatting</li>
+            <li>Collaborate with others to find better solutions</li>
+        </ul>
+    </section>
+
+    <section class="latex-guide">
+        <h3>How to Write Math Using LaTeX</h3>
+        <p>When posting, wrap your math expressions with <code>$...$</code> 
+        
+        <p>For more LaTeX syntax, visit the <a href="https://katex.org/docs/supported.html" target="_blank">KaTeX Documentation</a>.</p>
+    </section>
+</div>
+
+{% endblock %}
+
