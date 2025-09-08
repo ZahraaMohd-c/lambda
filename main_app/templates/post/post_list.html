@@ -1,22 +1,29 @@
 {% extends "base.html" %}
 
 {% block body %}
-<form method="get" >
-  <input type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}">
-  <button type="submit">Search</button>
-</form>
-      <h1>posts</h1>
-      <a href="{% url 'post_create'%}">
-        <button>+</button></a>
+<div class="posts-container">
+    <form method="get" class="search-form">
+        <input type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="header">
+        <h1>Posts</h1>
+        <a href="{% url 'post_create' %}" class="create-post-btn">+</a>
+    </div>
+
+    <div class="posts-list">
         {% if posts %}
             {% for post in posts %}
-            <p>{{post.user}} </p>
-            <a href="{% url 'post_details' post.id%}">
-                {{post.post_title}}
-            </a>
-            <p>{{post.post_date}} </p>
+            <div class="post-card">
+                <p class="post-user">{{ post.user }}</p>
+                <a href="{% url 'post_details' post.id %}" class="post-title">{{ post.post_title }}</a>
+                <p class="post-date">{{ post.post_date }}</p>
+            </div>
             {% endfor %}
         {% else %}
-          <p>There is no posts yet</p>
+            <p class="no-posts">There are no posts yet</p>
         {% endif %}
- {% endblock  %}
+    </div>
+</div>
+{% endblock %}
