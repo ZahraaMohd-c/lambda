@@ -8,7 +8,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, PostForm, ReplyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-
 # Create your views here.
 
 

@@ -1,23 +1,36 @@
-{% comment %} {% extends "base.html" %} {% endcomment %}
-{% block body  %}
-    <h1>Sign up</h1>
-    <form method='post'>
-        {% csrf_token %}
-        <label for="username">Username: </label>
-        <input type="text" id='username' name='username'>
-        <br>
-        <label for="password">Password: </label>
-        <input type="password" id='password' name='password'>
-        <br>
-        <button>Sign up</button>
-        {% if form.errors %}
-            <ul class="error-list">
-                {% for field, errors in form.errors.items %}
-                    <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        <p>Already Have An Account? <a href="{% url 'login'%}">Login</a></p>
-    </form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Lambda</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}"> 
+</head>
+<body>
+    <div class="login-container">
+        <h1>Sign up</h1>
+        <form method='post' class='login-form'>
+            {% csrf_token %}
+            <label for="username">Username </label>
+            <input type="text" id='username' name='username'>
+            <br>
+            <label for="password">Password </label>
+            <input type="password" id='password' name='password'>
+            <br>
+            {% if form.errors %}
+            <div class="error-list">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <button class="btn-primary">Sign up</button>
+            <p class="signup-text">Already Have An Account? <a href="{% url 'login'%}">Login</a></p>
+        </form>
+    </div>
 
-{% endblock  %}
+</body>
+</html>
