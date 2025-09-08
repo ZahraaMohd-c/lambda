@@ -56,7 +56,6 @@ body {
     color: white;
     border: none;
     padding: 6px 12px;
-    border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
@@ -70,7 +69,6 @@ body {
     color: white;
     border: none;
     padding: 6px 12px;
-    border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
@@ -87,7 +85,6 @@ body {
     text-decoration: none; 
     border: none;
     padding: 6px 12px;
-    border-radius: 5px;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
@@ -176,7 +173,7 @@ body {
 .homepage-container img {
     width: 250px;
     height: 280px;
-    margin: 20px;
+    margin: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     align-self: center;
 }
@@ -185,3 +182,123 @@ body {
     box-shadow: 0 12px 25px rgba(0,0,0,0.4);
 }
 
+/* post list  */
+
+.posts-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+.posts-container h1{
+    font-weight: 700;
+    color: #0A1653;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.search-form button {
+    padding: 6px 16px;
+    background: #0A1653 ;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.search-form button:hover {
+    background: #4E75FF;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-post-btn {
+    position: fixed;       
+    bottom: 40px;          
+    right: 30px;            
+    width: 50px;            
+    height: 50px;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 50%;     
+    background: #0A1653;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 1000;   
+          
+}
+
+.create-post-btn a{
+    text-decoration: none;
+}
+
+.create-post-btn:hover {
+    background: linear-gradient(90deg, #2F54D1, #1B3CA8);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.post-user {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.post-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0A1653;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.post-title:hover {
+    color: #4E75FF;
+}
+
+.post-date {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.no-posts {
+    text-align: center;
+    color: #555;
+    font-size: 1.1rem;
+}

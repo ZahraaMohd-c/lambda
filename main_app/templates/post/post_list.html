@@ -4,12 +4,15 @@
 <div class="posts-container">
     <form method="get" class="search-form">
         <input type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}">
-        <button type="submit">Search</button>
+        <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 
     <div class="header">
         <h1>Posts</h1>
-        <a href="{% url 'post_create' %}" class="create-post-btn">+</a>
+        <div class="create-post-btn">
+          <a href="{% url 'post_create' %}" >+</a>
+
+        </div>
     </div>
 
     <div class="posts-list">
