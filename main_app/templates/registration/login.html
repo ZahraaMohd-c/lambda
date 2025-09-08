@@ -1,25 +1,39 @@
-{% comment %} {% extends "base.html" %} {% endcomment %}
-{% block body  %}
-    <h1>Login</h1>
-    <form method='post'>
-        {% csrf_token %}
-        <label for="username">Username</label>
-        <input type="text" id='username' name='username' >
-        <br>
-        <label for="password">Password</label>
-        <input type="password" id='password' name='password' >
-        <br>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Lambda</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}"> 
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
 
-        {% if form.non_field_errors %}
-            <div class="error-list">
-                {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
 
-        <button>Login</button>
-        <p>Don't Have An Account? <a href="{% url 'signup'%}">Signup</a></p>
-    </form>
-    <a href="{% url 'home_page'%}">Continue as Guest</a>
-{% endblock  %}
+            {% if form.non_field_errors %}
+                <div class="error-list">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <button class="btn-primary">Login</button>
+
+            <p class="signup-text">
+                Don't have an account? <a href="{% url 'signup' %}">Signup</a>
+            </p>
+        </form>
+
+        <a href="{% url 'home_page' %}" class="guest-link">Continue as Guest</a>
+    </div>
+</body>
+</html>
