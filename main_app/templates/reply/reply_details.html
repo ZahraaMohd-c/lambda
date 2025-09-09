@@ -1,31 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block body %}
+<div class="reply-details-container">
     <h1>Reply Details</h1>
-    <p>User: {{ reply.user.username }}</p>
-    <p>Content: {{ reply.reply_content }}</p>
-    {% if reply.reply_image %}
-        <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
-    {% endif %}
-    <p>Date: {{ reply.reply_date|date:"M d, Y" }}</p>
 
-    <form method="post" action="{% url 'like_reply' reply.id %}">
+    <div class="reply-card">
+        <p class="reply-user"><strong>User: </strong> {{ reply.user.username }}</p>
+        <h3 class="reply-content"> {{ reply.reply_content }}</h3>
+
+        {% if reply.reply_image %}
+            <img src="{{ reply.reply_image.url }}" alt="Reply image" class="reply-image">
+        {% endif %}
+
+        <p class="reply-date"><strong>Date:</strong> {{ reply.reply_date|date:"M d, Y" }}</p>
+
+        <form method="post" action="{% url 'like_reply' reply.id %}" class="like-form">
             {% csrf_token %}
-            <button id="like-btn" type="submit" data-reply-id="{{ reply.id }}">
-            {% if did_liked %}
-                ❤️ 
-            {% else %}
-                🤍 
-            {% endif %}
-        </button>
-        <span id="like-count">{{ reply.like_reply.count }} likes</span>
+            <button id="like-btn" type="submit" class="like-btn" data-reply-id="{{ reply.id }}">
+                {% if did_liked %}
+                    ❤️
+                {% else %}
+                    🤍
+                {% endif %}
+            </button>
+            <span id="like-count">{{ reply.like_reply.count }} likes</span>
         </form>
-    {% if user.is_authenticated and reply.user == user %}
-        <form action="{% url 'reply_delete' reply.id %}" method='post'>
-            {% csrf_token %}
-            <button>Delete</button>
-        </form>
-    {% endif %}
+
+        {% if user.is_authenticated and reply.user == user %}
+            <form action="{% url 'reply_delete' reply.id %}" method="post" class="delete-form">
+                {% csrf_token %}
+                <button class="btn-delete">Delete</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
-
-

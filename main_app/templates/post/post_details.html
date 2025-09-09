@@ -37,7 +37,7 @@
                         <img src="{{ reply.reply_image.url }}" alt="Reply image">
                     {% endif %}
                     <br>
-                    <a href="{% url 'reply_details' reply.id %}">
+                    <a href="{% url 'reply_details' reply.id %}" class="reply-link">
                         {{ reply.reply_content }}
                     </a>
                     <br>

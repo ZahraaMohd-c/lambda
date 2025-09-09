@@ -585,6 +585,12 @@ body {
     transition: background 0.3s;
 }
 
+.reply-link{
+    color: #1B3CA8;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: larger;
+}
 /* reply form */
 
 .reply-form-container {
@@ -675,4 +681,73 @@ body {
     border: none;
     cursor: pointer;
     font-size: 12px;
+}
+
+/* reply details */
+
+.reply-details-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    font-family: "Karla", sans-serif;
+}
+
+.reply-details-container h1 {
+    text-align: center;
+    color: #0A1653;
+    margin-bottom: 20px;
+}
+
+.reply-card p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.reply-image {
+    display: block;
+    margin: 10px 0;
+    max-width: 300px;
+}
+
+.like-form {
+    margin: 15px 0;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like-btn:hover {
+    transform: scale(1.2);
+}
+
+#like-count {
+    margin-left: 8px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.btn-delete {
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: #c9302c;
+    transform: translateY(-2px);
+}
+
+.reply-content {
+    color: #0A1653;
 }
