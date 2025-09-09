@@ -472,3 +472,89 @@ body {
     background: #3a78c2;
 }
 
+.replies-section {
+    margin-top: 30px;
+}
+
+.replies-section h3 {
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.replies-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.replies-section li {
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    background: #fafafa;
+}
+
+.replies-section li strong {
+    color: #333;
+    font-size: 15px;
+}
+
+.replies-section img {
+    max-width: 120px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 5px;
+    transition: transform 0.2s;
+}
+
+.like-btn:hover {
+    transform: scale(1.2);
+}
+
+.like-count {
+    font-size: 13px;
+    color: #666;
+}
+
+.add-reply {
+    display: inline-block;
+    margin-top: 10px;
+    background: #0A1653;
+    color: #fff;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.add-reply:hover {
+    background: #1B3CA8;
+}
+
+.post-author {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.post-author span {
+    font-weight: bold;
+    color: #2b6cb0;
+}
+
+.all-reply {
+    display: inline-block;
+    margin-top: 10px;
+    color: #1B3CA8;
+    padding: 8px 14px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
