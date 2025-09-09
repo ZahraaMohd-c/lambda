@@ -1,73 +1,80 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h2>{{post.post_title}} </h2>
-<p>Category: {{post.category}} </p>
-<h3>${{post.post_content|safe}}$ </h3>
-{% if post.post_image %}
-     <img src="{{post.post_image.url}}" alt="post image" style="width:300px; height:auto;">       
-{% endif %}
-<p>{{post.post_date}} </p>
-{% if user.is_authenticated and post.user == user %}
-<a href="{% url 'post_update' post.id%}">update</a>
+<div class="post-container">
+    <h2>{{ post.post_title }}</h2>
+    <p class="post-meta">Category: {{ post.category }}</p>
+    <h3 id="post-content">${{ post.post_content|safe }}$</h3>
 
-<form action="{% url 'post_delete' post.id%}" method='post'>
-    {% csrf_token %}
-    <button>Delete</button>
-</form>
-{% endif %}
-<br>
-<hr>
-<h3>Replies</h3>
-{% if replies %}
-    <ul>
-        {% for reply in replies|slice:":4" %}
-            <li>
-                <strong>{{ reply.user.username }}</strong>
-                <br>
-                {% if reply.reply_image %}
-                <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
-                {% endif %}
-                <br>
-                <a href="{% url 'reply_details' reply.id %}">
-                {{ reply.reply_content }}
-                <br>
-                </a>
-                <small>{{ reply.reply_date|date:"M d, Y" }}</small>
-                <br>
-                <form action="{% url 'like_reply' reply.id %}" method="post">
-                    {% csrf_token %}
-                    <button class="like-btn" data-reply-id="{{ reply.id }}">
-                       {% if reply.liked_by_user %}
-                            ❤️
-                       {% else %}
-                            🤍
-                       {% endif %}
-                   </button>
-                </form>
-                <small class="like-count">{{ reply.like_reply.count }} likes</small>
-            </li>
-        {% endfor %}
-    </ul>
-    {% if replies|length > 4 %}
-        <a href="{% url 'post_replies' post.id %}">View all replies</a>
+    {% if post.post_image %}
+        <img src="{{ post.post_image.url }}" alt="Post image">
     {% endif %}
-{% else %}
-    <p>No replies yet.</p>
-{% endif %}
-{% if user.is_authenticated %}
 
-<a href="{% url 'reply_create' post.id %}">Add A reply</a>
-{% else %}
-<p><a href="{% url 'login' %}">Login</a> to post a reply.</p>
-{% endif %}
+    <p class="post-meta">Posted on: {{ post.post_date }}</p>
+
+    {% if user.is_authenticated and post.user == user %}
+    <div class="post-actions">
+        <a href="{% url 'post_update' post.id %}">Update</a>
+        <form action="{% url 'post_delete' post.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <hr>
+
+    <div class="replies-section">
+        <h3>Replies</h3>
+        {% if replies %}
+            <ul>
+                {% for reply in replies|slice:":4" %}
+                <li>
+                    <strong>{{ reply.user.username }}</strong>
+                    <br>
+                    {% if reply.reply_image %}
+                        <img src="{{ reply.reply_image.url }}" alt="Reply image">
+                    {% endif %}
+                    <br>
+                    <a href="{% url 'reply_details' reply.id %}">
+                        {{ reply.reply_content }}
+                    </a>
+                    <br>
+                    <small>{{ reply.reply_date|date:"M d, Y" }}</small>
+                    <br>
+                    <form action="{% url 'like_reply' reply.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button class="like-btn" data-reply-id="{{ reply.id }}">
+                            {% if reply.liked_by_user %}
+                                ❤️
+                            {% else %}
+                                🤍
+                            {% endif %}
+                        </button>
+                    </form>
+                    <small class="like-count">{{ reply.like_reply.count }} likes</small>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if replies|length > 4 %}
+                <a href="{% url 'post_replies' post.id %}">View all replies</a>
+            {% endif %}
+        {% else %}
+            <p>No replies yet.</p>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'reply_create' post.id %}" class="add-reply">Add a Reply</a>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a> to post a reply.</p>
+        {% endif %}
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         MathJax.typesetPromise([document.getElementById("post-content")])
-    })
+    });
 </script>
-
 {% endblock %}
