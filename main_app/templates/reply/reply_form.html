@@ -1,55 +1,62 @@
 {% extends "base.html" %}
 
-{% block body  %}
-<form  method='post' enctype="multipart/form-data">
-    {% csrf_token %}
-    <label for="reply_content">Reply:</label>
-    <textarea placeholder='Write your reply...' name="reply_content" id="reply_content">{{reply.reply_content}} </textarea>
-    <div>
-        <label>
-            <input type="checkbox" id="live_preview_toggle" checked>
-                    Enable live preview
-        </label>
-    </div>
+{% block body %}
+<div class="reply-form-container">
+    <h2>Write a Reply</h2>
+    <form method="post" enctype="multipart/form-data" class="reply-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="reply_content">Reply:</label>
+            <textarea placeholder="Write your reply..." name="reply_content" id="reply_content">{{ reply.reply_content }}</textarea>
+        </div>
 
-    <div id="math_preview" >
-        <em>Math preview will appear here...</em>
-    </div>
+        <div class="form-toggle">
+            <label>
+                <input type="checkbox" id="live_preview_toggle" checked>
+                Enable live preview
+            </label>
+        </div>
 
-    <label for="reply_image"></label>
-    <input type="file" id="reply_image" name="reply_image">
+        <div id="math_preview" class="math-preview">
+            <em>Math preview will appear here...</em>
+        </div>
+
+        <div class="form-group">
+            <label for="reply_image">Attach an image (optional)</label>
+            <input type="file" id="reply_image" name="reply_image">
             {% if reply.reply_image %}
-                <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
+                <img src="{{ reply.reply_image.url }}" alt="Reply image" class="reply-image-preview">
             {% endif %}
+        </div>
 
-        <button type='submit'>Reply</button>
-</form>
+        <button type="submit" class="btn-primary">Reply</button>
+    </form>
+</div>
 
 <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$']],
-                displayMath: [['$', '$']]
-            }
-        };
+    window.MathJax = {
+        tex: { inlineMath: [['$', '$']], displayMath: [['$', '$']] }
+    };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <script>
-        const textarea = document.getElementById('reply_content')
-        const preview = document.getElementById('math_preview')
-        const toggle = document.getElementById('live_preview_toggle')
-        function updatePreview() {
-            if (!toggle.checked) {
-                preview.innerHTML = '<em>Live preview disabled</em>'
-                return
-            }
-            preview.textContent = textarea.value || 'Type something with LaTeX syntax...'
-            MathJax.typesetPromise([preview])
-        }
+<script>
+    const textarea = document.getElementById('reply_content');
+    const preview = document.getElementById('math_preview');
+    const toggle = document.getElementById('live_preview_toggle');
 
-        textarea.addEventListener('input', updatePreview)
-        toggle.addEventListener('change', updatePreview)
-        updatePreview() 
-    </script>
-{% endblock  %}
+    function updatePreview() {
+        if (!toggle.checked) {
+            preview.innerHTML = '<em>Live preview disabled</em>';
+            return;
+        }
+        preview.textContent = textarea.value || 'Type something with LaTeX syntax...';
+        MathJax.typesetPromise([preview]);
+    }
+
+    textarea.addEventListener('input', updatePreview);
+    toggle.addEventListener('change', updatePreview);
+    updatePreview();
+</script>
+{% endblock %}
