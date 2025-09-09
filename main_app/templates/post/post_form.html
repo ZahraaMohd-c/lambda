@@ -7,15 +7,15 @@
         {% csrf_token %}
 
         <div class="form-group">
-            <label for="post_title">Post title:</label>
+            <label for="post_title">Post title</label>
             <input type="text" id="post_title" name="post_title"
                    value="{{ post.post_title }}">
         </div>
 
         <div class="form-group">
-            <label for="post_content">Post content:</label>
+            <label for="post_content">Post content</label>
             <textarea id="post_content" name="post_content" >{{ post.post_content }}</textarea>
-            <small>Use LaTeX syntax, e.g.,$x^2 + y^2 = z^2$</small>
+            <small>Use LaTeX syntax.</small>
 
             <div class="form-toggle">
                 <label>
@@ -29,8 +29,8 @@
             </div>
         </div>
 
-        <div>
-            <label for="post_image"  class="form-group">Image:</label>
+        <div class="form-group"> 
+            <label for="post_image"  >Image</label>
             <input type="file" id="post_image" name="post_image">
             {% if post.post_image %}
                  <img src="{{ post.post_image.url }}" alt="Post image" class="post-image-preview">
@@ -38,11 +38,11 @@
         </div>
 
         <div class="form-group">
-            <label for="category">Category:</label>
+            <label for="category">Category</label>
             {{ form.category }}
         </div>
 
-        <button type="submit" class="btn-submit">Submit</button>
+        <button type="submit" >Submit</button>
     </form>
 
     <script>

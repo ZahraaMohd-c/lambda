@@ -8,6 +8,7 @@ body {
     font-family: "Karla", sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #edebeb;
 }
 
 .navbar {
@@ -268,6 +269,7 @@ body {
     padding: 15px;
     border: 1px solid #ddd;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
 }
 
 .post-card:hover {
@@ -308,3 +310,104 @@ body {
 
 /* post form */
 
+.post-form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.cancel-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #3a78c2;
+    font-weight: 500;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+    color: #0A1653;
+}
+
+.post-form .form-group {
+    margin-bottom: 20px;
+}
+
+.post-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.post-form input[type="text"],
+.post-form textarea,
+.post-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: border 0.2s;
+}
+
+.post-form input[type="text"]:focus,
+.post-form textarea:focus,
+.post-form select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.post-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.post-image-preview {
+    display: block;
+    max-width: 150px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+#math_preview {
+    margin-top: 10px;
+    padding: 12px;
+    background: #f9f9f9;
+    border: 1px dashed #bbb;
+    min-height: 40px;
+}
+
+#math_preview em {
+    color: #777;
+}
+
+.form-toggle {
+    margin-top: 10px;
+}
+
+.post-form button[type="submit"] {
+    background: #0A1653;
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.post-form button[type="submit"]:hover {
+    background: #3a78c2;
+}
+
+.post-form input[type="file"]::file-selector-button {
+    background-color: #0A1653;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
