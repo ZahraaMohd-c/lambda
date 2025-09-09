@@ -751,3 +751,104 @@ body {
 .reply-content {
     color: #0A1653;
 }
+
+/* reply list */
+
+.replies-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-family: "Karla", sans-serif;
+}
+
+.replies-container h1 {
+    text-align: center;
+    color: #0A1653;
+    margin-bottom: 20px;
+}
+
+.replies-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.reply-card {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reply-card:last-child {
+    border-bottom: none;
+}
+
+.reply-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.reply-user {
+    font-weight: 600;
+    color: #0A1653;
+}
+
+.reply-date {
+    font-style: italic;
+    color: #777;
+}
+
+.reply-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.reply-content {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.reply-image {
+    margin-top: 8px;
+    max-width: 100px;
+    border: 1px solid #ddd;
+}
+
+.like-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like-btn:hover {
+    transform: scale(1.2);
+}
+
+.like-count {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.no-replies {
+    text-align: center;
+    color: #777;
+    font-size: 1rem;
+    padding: 20px 0;
+}
