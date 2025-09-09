@@ -584,3 +584,95 @@ body {
     font-weight: 600;
     transition: background 0.3s;
 }
+
+/* reply form */
+
+.reply-form-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    font-family: "Karla", sans-serif;
+}
+
+.reply-form-container h2 {
+    text-align: center;
+    color: #0A1653;
+    margin-bottom: 20px;
+}
+
+.reply-form .form-group {
+    margin-bottom: 15px;
+}
+
+.reply-form label {
+    font-weight: 500;
+    color: #0A1653;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.reply-form textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.reply-form textarea:focus {
+    border-color: #4E75FF;
+    outline: none;
+}
+
+.reply-image-preview {
+    margin-top: 10px;
+    max-width: 120px;
+    display: block;
+}
+
+.form-toggle {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #0A1653;
+}
+
+.math-preview {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.btn-primary {
+    background: #0A1653;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-primary:hover {
+    background: #2F54D1;
+    transform: translateY(-2px);
+}
+
+.reply-form input[type="file"]::file-selector-button {
+    background-color: #0A1653;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
