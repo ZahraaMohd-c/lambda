@@ -90,6 +90,11 @@ class PostUpdateView(LoginRequiredMixin,UpdateView):
     pk_url_kwarg = 'post_id'
     context_object_name = 'post'
     success_url = reverse_lazy('post_list')
+
+    def form_valid(self, form):
+        post = self.get_object()
+        post.replies.all().delete()
+        return super().form_valid(form)
     
 class PostDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
