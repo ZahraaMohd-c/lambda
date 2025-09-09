@@ -1,36 +1,40 @@
 {% extends "base.html" %}
 
 {% block body %}
+<div class="replies-container">
     <h1>Replies</h1>
     {% if replies %}
-    <ul>
-        {% for reply in replies %}
-            <li>
-                <p>{{ reply.user }} </p>
-                <a href="{% url 'reply_details' reply.id %}">
-                <p>{{ reply.reply_content }} </p>
-                {% if reply.reply_image %}
-                    <img src="{{ reply.reply_image.url }}" alt="Reply image" width="100">
-                {% endif %}
-                </a>
-                <p>{{ reply.reply_date }} </p>
+        <ul class="replies-list">
+            {% for reply in replies %}
+                <li class="reply-card">
+                    <div class="reply-header">
+                        <span class="reply-user">{{ reply.user }}</span>
+                        <span class="reply-date">{{ reply.reply_date|date:"M d, Y" }}</span>
+                    </div>
 
-                <form method="post" action="{% url 'like_reply' reply.id %}">
-                    {% csrf_token %}
-                    <button id="like-btn" type="submit" data-reply-id="{{ reply.id }}">
-                    {% if reply.liked_by_user %}
-                        ❤️ 
-                    {% else %}
-                        🤍 
-                    {% endif %}
-                </button>
-                <span id="like-count">{{ reply.like_reply.count }} likes</span>
-                </form>
-                
-            </li>
-        {% endfor %}
-    </ul>
+                    <a href="{% url 'reply_details' reply.id %}" class="reply-link">
+                        <p class="reply-content">{{ reply.reply_content }}</p>
+                        {% if reply.reply_image %}
+                            <img src="{{ reply.reply_image.url }}" alt="Reply image" class="reply-image">
+                        {% endif %}
+                    </a>
+
+                    <form method="post" action="{% url 'like_reply' reply.id %}" class="like-form" data-reply-id="{{ reply.id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="like-btn" data-reply-id="{{ reply.id }}">
+                            {% if reply.liked_by_user %}
+                                ❤️
+                            {% else %}
+                                🤍
+                            {% endif %}
+                        </button>
+                        <span class="like-count">{{ reply.like_reply.count }} likes</span>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-    <p>No replies yet.</p>
+        <p class="no-replies">No replies yet.</p>
     {% endif %}
-{% endblock  %}
+</div>
+{% endblock %}
