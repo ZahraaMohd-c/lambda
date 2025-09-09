@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="post-container">
+    <p class="post-author">Posted by: <span>{{post.user}}</span> </p>
     <h2>{{ post.post_title }}</h2>
     <p class="post-meta">Category: {{ post.category }}</p>
     <h3 id="post-content">${{ post.post_content|safe }}$</h3>
@@ -57,7 +58,7 @@
                 {% endfor %}
             </ul>
             {% if replies|length > 4 %}
-                <a href="{% url 'post_replies' post.id %}">View all replies</a>
+                <a class='all-reply' href="{% url 'post_replies' post.id %}">View all replies</a>
             {% endif %}
         {% else %}
             <p>No replies yet.</p>
@@ -75,6 +76,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         MathJax.typesetPromise([document.getElementById("post-content")])
-    });
+    })
 </script>
 {% endblock %}

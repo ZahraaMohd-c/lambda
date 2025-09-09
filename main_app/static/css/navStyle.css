@@ -316,7 +316,7 @@ body {
     background: #fff;
     padding: 25px 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    font-family: "Karla", sans-serif;
 }
 
 .cancel-link {
@@ -411,3 +411,64 @@ body {
     cursor: pointer;
     font-size: 12px;
 }
+
+/* post details */
+.post-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: "Karla", sans-serif;
+}
+
+.post-container h2 {
+    font-size: 25px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-container p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.post-content {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #222;
+}
+
+.post-container img {
+    display: block;
+    max-width: 500px;
+    height: auto;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+}
+
+.post-meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.post-actions a,
+.post-actions form button {
+    display: inline-block;
+    margin: 5px 10px 5px 0;
+    padding: 6px 14px;
+    background: #0A1653;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.post-actions a:hover,
+.post-actions form button:hover {
+    background: #3a78c2;
+}
+
