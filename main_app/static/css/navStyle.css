@@ -200,18 +200,6 @@ body {
     animation: fadeIn 1s ease forwards;
 }
 
-.homepage-container img {
-    width: 250px;
-    height: 280px;
-    margin: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    align-self: center;
-}
-
-.homepage-container img:hover {
-    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-}
-
 /* post list & user  */
 
 .posts-container {
