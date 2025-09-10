@@ -38,7 +38,7 @@
                     {% endif %}
                     <br>
                     <a href="{% url 'reply_details' reply.id %}" class="reply-link">
-                        {{ reply.reply_content }}
+                        ${{ reply.reply_content|safe }}$
                     </a>
                     <br>
                     <small>{{ reply.reply_date|date:"M d, Y" }}</small>
@@ -75,7 +75,9 @@
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        MathJax.typesetPromise([document.getElementById("post-content")])
+        MathJax.typesetPromise([document.getElementById("post-content")]),
+        MathJax.typesetPromise([document.getElementById("reply-link")]),
+        
     })
 </script>
 {% endblock %}
